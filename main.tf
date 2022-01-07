@@ -35,11 +35,5 @@ terraform {
       name = "apnmt_gh_actions"
     }
   }
-
-  backend "s3" {
-    bucket = "apnmt-terraform-state"
-    key    = "/"
-    region = var.region
-  }
 }
 
