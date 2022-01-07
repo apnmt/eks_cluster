@@ -28,6 +28,14 @@ terraform {
 
   required_version = ">= 0.14"
 
+  cloud {
+    organization = "apnmt"
+
+    workspaces {
+      name = "apnmt_gh_actions"
+    }
+  }
+
   backend "s3" {
     bucket = "apnmt-terraform-state"
     key    = "/"
