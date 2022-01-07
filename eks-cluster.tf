@@ -20,10 +20,18 @@ module "eks" {
   worker_groups = [
     {
       name                          = "worker-group-1"
-      instance_type                 = "t2.micro"
+      instance_type                 = "t4g.small"
       additional_userdata           = "apnmt service instances"
-      asg_desired_capacity          = 10
-      asg_max_size                  = 10
+      asg_desired_capacity          = 6
+      asg_max_size                  = 6
+      additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
+    },
+    {
+      name                          = "worker-group-2"
+      instance_type                 = "a1.xlarge"
+      additional_userdata           = "apnmt service instances"
+      asg_desired_capacity          = 3
+      asg_max_size                  = 3
       additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
     }
   ]
