@@ -43,7 +43,11 @@ jobs:
 
       - name: Terraform Output
         run: |
-          echo Cluster Region: $(terraform output -raw region)
-          echo Cluster Name: $(terraform output -raw cluster_name)
+          echo Cluster Region:
+          $(terraform output -raw region)
+          echo Cluster Name:
+          $(terraform output -raw cluster_name)
+          echo Cluster Endpoint:
+          $(terraform output -raw cluster_endpoint)
           echo Command to connect to Cluster: aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
 
