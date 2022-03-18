@@ -5,6 +5,7 @@ provider "registry.terraform.io/hashicorp/aws" {
   version     = "3.70.0"
   constraints = ">= 3.15.0, >= 3.20.0, >= 3.56.0"
   hashes = [
+    "h1:7rt5BdmiBJOFlNHstjwg2tDP4b+/+4sSvjz5ywP4HJE=",
     "h1:nUJfymSecxxYgW+Vc3tqv9Ymlqc91ZeGk5t4vnRaC3c=",
     "zh:0af710e528e21b930899f0ac295b0ceef8ad7b623dd8f38e92c8ec4bc7af0321",
     "zh:4cabcd4519c0aae474d91ae67a8e3a4a8c39c3945c289a9cf7c1409f64409abe",
@@ -25,6 +26,7 @@ provider "registry.terraform.io/hashicorp/cloudinit" {
   constraints = ">= 2.0.0"
   hashes = [
     "h1:CUOSIT4XzkJXEpPp4dBL+rxxLgqamwiMvuhBVNHC7AI=",
+    "h1:Id6dDkpuSSLbGPTdbw49bVS/7XXHu/+d7CJoGDqtk5g=",
     "zh:76825122171f9ea2287fd27e23e80a7eb482f6491a4f41a096d77b666896ee96",
     "zh:795a36dee548e30ca9c9d474af9ad6d29290e0a9816154ad38d55381cd0ab12d",
     "zh:9200f02cb917fb99e44b40a68936fd60d338e4d30a718b7e2e48024a795a61b9",
@@ -39,10 +41,29 @@ provider "registry.terraform.io/hashicorp/cloudinit" {
   ]
 }
 
+provider "registry.terraform.io/hashicorp/helm" {
+  version = "2.4.1"
+  hashes = [
+    "h1:aFvUq5HOEwFV/3e7DGU45zDf6j2SThDRjaCAeY2Qfss=",
+    "zh:07517b24ea2ce4a1d3be3b88c3efc7fb452cd97aea8fac93ca37a08a8ec06e14",
+    "zh:11ef6118ed03a1b40ff66adfe21b8707ece0568dae1347ddfbcff8452c0655d5",
+    "zh:1ae07e9cc6b088a6a68421642c05e2fa7d00ed03e9401e78c258cf22a239f526",
+    "zh:1c5b4cd44033a0d7bf7546df930c55aa41db27b70b3bca6d145faf9b9a2da772",
+    "zh:256413132110ddcb0c3ea17c7b01123ad2d5b70565848a77c5ccc22a3f32b0dd",
+    "zh:4ab46fd9aadddef26604382bc9b49100586647e63ef6384e0c0c3f010ff2f66e",
+    "zh:5a35d23a9f08c36fceda3cef7ce2c7dc5eca32e5f36494de695e09a5007122f0",
+    "zh:8e9823a1e5b985b63fe283b755a821e5011a58112447d42fb969c7258ed57ed3",
+    "zh:8f79722eba9bf77d341edf48a1fd51a52d93ec31d9cac9ba8498a3a061ea4a7f",
+    "zh:b2ea782848b10a343f586ba8ee0cf4d7ff65aa2d4b144eea5bbd8f9801b54c67",
+    "zh:e72d1ccf8a75d8e8456c6bb4d843fd4deb0e962ad8f167fa84cf17f12c12304e",
+  ]
+}
+
 provider "registry.terraform.io/hashicorp/kubernetes" {
   version     = "2.7.1"
   constraints = ">= 1.11.1, >= 2.0.1"
   hashes = [
+    "h1:4LPAvfuRY3Kw9bycdOttVqxYryg1DThYhAr9D8jZ+fo=",
     "h1:oW4vjSt6yhfIifRk5RNthxGoGIxqovij48znbroh7xw=",
     "zh:0da320fd81ece6696f7cceda35e459ee97cae8955088af38fc7f2feab1dce924",
     "zh:37d304b8b992518c9c12e8f10437b9d4a0cc5a823c9421ac794ad2347c4d1122",
@@ -63,6 +84,7 @@ provider "registry.terraform.io/hashicorp/local" {
   constraints = ">= 1.4.0, 2.1.0"
   hashes = [
     "h1:/OpJKWupvFd8WJX1mTt8vi01pP7dkA6e//4l4C3TExE=",
+    "h1:PaQTpxHMbZB9XV+c1od1eaUvndQle3ZZHx79hrI6C3k=",
     "zh:0f1ec65101fa35050978d483d6e8916664b7556800348456ff3d09454ac1eae2",
     "zh:36e42ac19f5d68467aacf07e6adcf83c7486f2e5b5f4339e9671f68525fc87ab",
     "zh:6db9db2a1819e77b1642ec3b5e95042b202aee8151a0256d289f2e141bf3ceb3",
@@ -82,6 +104,7 @@ provider "registry.terraform.io/hashicorp/null" {
   constraints = "3.1.0"
   hashes = [
     "h1:SFT7X3zY18CLWjoH2GfQyapxsRv6GDKsy9cF1aRwncc=",
+    "h1:grYDj8/Lvp1OwME+g1AsECPN1czO5ssSf+8fCluCHQY=",
     "zh:02a1675fd8de126a00460942aaae242e65ca3380b5bb192e8773ef3da9073fd2",
     "zh:53e30545ff8926a8e30ad30648991ca8b93b6fa496272cd23b26763c8ee84515",
     "zh:5f9200bf708913621d0f6514179d89700e9aa3097c77dac730e8ba6e5901d521",
@@ -100,6 +123,7 @@ provider "registry.terraform.io/hashicorp/random" {
   version     = "3.1.0"
   constraints = "3.1.0"
   hashes = [
+    "h1:9cCiLO/Cqr6IUvMDSApCkQItooiYNatZpEXmcu0nnng=",
     "h1:EPIax4Ftp2SNdB9pUfoSjxoueDoLc/Ck3EUoeX0Dvsg=",
     "zh:2bbb3339f0643b5daa07480ef4397bd23a79963cc364cdfbb4e86354cb7725bc",
     "zh:3cd456047805bf639fbf2c761b1848880ea703a054f76db51852008b11008626",
@@ -120,6 +144,7 @@ provider "registry.terraform.io/terraform-aws-modules/http" {
   constraints = ">= 2.4.1"
   hashes = [
     "h1:bnpMAHU6468QXsTTfe/aOvzjj8hOALU1f+5iOoe0iNQ=",
+    "h1:fHqAXle/P/fT2k+HEyTqYVE+/RvpQAaBr6xXZgM66es=",
     "zh:0111f54de2a9815ded291f23136d41f3d2731c58ea663a2e8f0fef02d377d697",
     "zh:0740152d76f0ccf54f4d0e8e0753739a5233b022acd60b5d2353d248c4c17204",
     "zh:569518f46809ec9cdc082b4dfd4e828236eee2b50f87b301d624cfd83b8f5b0d",

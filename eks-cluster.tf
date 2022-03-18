@@ -9,6 +9,7 @@ module "eks" {
     Environment = "apnmt-k8s"
     GithubRepo  = "terraform-aws-eks"
     GithubOrg   = "terraform-aws-modules"
+    "karpenter.sh/discovery" = local.cluster_name
   }
 
   vpc_id = module.vpc.vpc_id
@@ -19,16 +20,12 @@ module "eks" {
 
   worker_groups = [
     {
-      name                          = "worker-group-1"
-      instance_type                 = "t4g.small"
-      additional_userdata           = "apnmt service instances"
-      asg_desired_capacity          = 6
-      asg_max_size                  = 6
-      additional_security_group_ids = [aws_security_group.worker_group_mgmt_one.id]
+      instance_type = "t2.micro"
+      asg_max_size  = 1
     },
     {
-      name                          = "worker-group-2"
-      instance_type                 = "a1.xlarge"
+      name                          = "worker-group-1"
+      instance_type                 = "t2.micro"
       additional_userdata           = "apnmt service instances"
       asg_desired_capacity          = 3
       asg_max_size                  = 3
