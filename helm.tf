@@ -126,6 +126,14 @@ resource "helm_release" "apnmt-elk" {
   depends_on = [helm_release.apnmt-emissary-apiext]
 }
 
+data "kubernetes_service" "emissary-ingress-load-balancer" {
+  metadata {
+    namespace = "apnmt"
+    name = "apnmt-emissary-ingress"
+  }
+  depends_on = [helm_release.apnmt-emissary-ingress]
+}
+
 resource "helm_release" "apnmt-monitoring" {
   name       = "apnmt-monitoring"
   repository = "https://apnmt.github.io/apnmt-charts/"
@@ -136,6 +144,11 @@ resource "helm_release" "apnmt-monitoring" {
   # helm chart can only be installed, if apnmt-emissary-apiext chart is already installed
   # otherwise Mapping will fail
   depends_on = [helm_release.apnmt-emissary-apiext]
+
+  set {
+    name  = "kube-prometheus-stack.grafana.grafana\\.ini.server.root_url"
+    value = "https://${data.kubernetes_service.emissary-ingress-load-balancer.status.0.load_balancer.0.ingress.0.hostname}/grafana"
+  }
 }
 
 resource "helm_release" "apnmt-kafka" {

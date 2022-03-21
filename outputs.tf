@@ -32,3 +32,8 @@ output "cluster_name" {
   description = "Kubernetes Cluster Name"
   value       = local.cluster_name
 }
+
+output "emissary_ingress_url" {
+  description = "Emissary Ingress Endpoint Url"
+  value = data.kubernetes_service.emissary-ingress-load-balancer.status.0.load_balancer.0.ingress.0.hostname
+}
