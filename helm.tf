@@ -17,17 +17,17 @@ resource "helm_release" "karpenter" {
   name       = "karpenter"
   repository = "https://charts.karpenter.sh"
   chart      = "karpenter"
-  version    = "v0.6.0"
+  version    = "v0.7.3"
   set {
     name  = "serviceAccount.annotations.eks\\.amazonaws\\.com/role-arn"
     value = module.iam_assumable_role_karpenter.iam_role_arn
   }
   set {
-    name  = "controller.clusterName"
+    name  = "clusterName"
     value = local.cluster_name
   }
   set {
-    name  = "controller.clusterEndpoint"
+    name  = "clusterEndpoint"
     value = module.eks.cluster_endpoint
   }
   set {
