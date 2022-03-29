@@ -70,12 +70,16 @@ resource "helm_release" "metrics-server" {
   name       = "metrics-server"
   repository = "https://kubernetes-sigs.github.io/metrics-server/"
   chart      = "metrics-server"
+
+  depends_on = [helm_release.karpenter_provisioner]
 }
 
 resource "helm_release" "apnmt-emissary-apiext" {
   name       = "apnmt-emissary-apiext"
   repository = "https://apnmt.github.io/apnmt-charts/"
   chart      = "apnmt-emissary-apiext"
+
+  depends_on = [helm_release.karpenter_provisioner]
 }
 
 resource "helm_release" "apnmt-emissary-tracing" {
@@ -111,7 +115,7 @@ resource "helm_release" "apnmt-tracing" {
 
   # helm chart can only be installed, if apnmt-emissary-apiext chart is already installed
   # otherwise Mapping will fail
-  depends_on = [helm_release.apnmt-emissary-apiext]
+  depends_on = [helm_release.apnmt-emissary-ingress]
 }
 
 resource "helm_release" "apnmt-elk" {
@@ -123,7 +127,7 @@ resource "helm_release" "apnmt-elk" {
 
   # helm chart can only be installed, if apnmt-emissary-apiext chart is already installed
   # otherwise Mapping will fail
-  depends_on = [helm_release.apnmt-emissary-apiext]
+  depends_on = [helm_release.apnmt-emissary-ingress]
 }
 
 data "kubernetes_service" "emissary-ingress-load-balancer" {
@@ -143,7 +147,7 @@ resource "helm_release" "apnmt-monitoring" {
 
   # helm chart can only be installed, if apnmt-emissary-apiext chart is already installed
   # otherwise Mapping will fail
-  depends_on = [helm_release.apnmt-emissary-apiext]
+  depends_on = [helm_release.apnmt-emissary-ingress]
 
   set {
     name  = "kube-prometheus-stack.grafana.grafana\\.ini.server.root_url"
@@ -157,6 +161,8 @@ resource "helm_release" "apnmt-kafka" {
   chart      = "apnmt-kafka"
   namespace = "apnmt"
   create_namespace = true
+
+  depends_on = [helm_release.karpenter_provisioner]
 }
 
 resource "helm_release" "appointmentservice-k8s" {
@@ -168,7 +174,16 @@ resource "helm_release" "appointmentservice-k8s" {
 
   # helm chart can only be installed, if apnmt-emissary-apiext chart is already installed
   # otherwise Mapping will fail
-  depends_on = [helm_release.apnmt-emissary-apiext]
+  depends_on = [helm_release.apnmt-emissary-ingress]
+
+  set {
+    name = "hpa.targetCPUUtilizationPercentage"
+    value = 50
+  }
+  set {
+    name = "hpa.maxReplica"
+    value = 3
+  }
 }
 
 resource "helm_release" "organizationservice-k8s" {
@@ -180,7 +195,16 @@ resource "helm_release" "organizationservice-k8s" {
 
   # helm chart can only be installed, if apnmt-emissary-apiext chart is already installed
   # otherwise Mapping will fail
-  depends_on = [helm_release.apnmt-emissary-apiext]
+  depends_on = [helm_release.apnmt-emissary-ingress]
+
+  set {
+    name = "hpa.targetCPUUtilizationPercentage"
+    value = 50
+  }
+  set {
+    name = "hpa.maxReplica"
+    value = 3
+  }
 }
 
 resource "helm_release" "organizationappointmentservice-k8s" {
@@ -192,7 +216,16 @@ resource "helm_release" "organizationappointmentservice-k8s" {
 
   # helm chart can only be installed, if apnmt-emissary-apiext chart is already installed
   # otherwise Mapping will fail
-  depends_on = [helm_release.apnmt-emissary-apiext]
+  depends_on = [helm_release.apnmt-emissary-ingress]
+
+  set {
+    name = "hpa.targetCPUUtilizationPercentage"
+    value = 50
+  }
+  set {
+    name = "hpa.maxReplica"
+    value = 3
+  }
 }
 
 resource "helm_release" "paymentservice-k8s" {
@@ -204,7 +237,16 @@ resource "helm_release" "paymentservice-k8s" {
 
   # helm chart can only be installed, if apnmt-emissary-apiext chart is already installed
   # otherwise Mapping will fail
-  depends_on = [helm_release.apnmt-emissary-apiext]
+  depends_on = [helm_release.apnmt-emissary-ingress]
+
+  set {
+    name = "hpa.targetCPUUtilizationPercentage"
+    value = 50
+  }
+  set {
+    name = "hpa.maxReplica"
+    value = 3
+  }
 }
 
 resource "helm_release" "authservice-k8s" {
@@ -216,5 +258,14 @@ resource "helm_release" "authservice-k8s" {
 
   # helm chart can only be installed, if apnmt-emissary-apiext chart is already installed
   # otherwise Mapping will fail
-  depends_on = [helm_release.apnmt-emissary-apiext]
+  depends_on = [helm_release.apnmt-emissary-ingress]
+
+  set {
+    name = "hpa.targetCPUUtilizationPercentage"
+    value = 50
+  }
+  set {
+    name = "hpa.maxReplica"
+    value = 3
+  }
 }
