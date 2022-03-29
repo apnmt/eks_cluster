@@ -12,6 +12,7 @@ module "vpc" {
   enable_dns_hostnames = true
 
   tags = {
+    ResourceGroup = "apnmt-k8s"
     "kubernetes.io/cluster/${local.cluster_name}" = "shared"
   }
 
@@ -38,4 +39,8 @@ resource "aws_iam_role_policy_attachment" "karpenter_ssm_policy" {
 resource "aws_iam_instance_profile" "karpenter" {
   name = "KarpenterNodeInstanceProfile-${local.cluster_name}"
   role = module.eks.worker_iam_role_name
+
+  tags = {
+    ResourceGroup = "apnmt-k8s"
+  }
 }

@@ -6,7 +6,7 @@ module "eks" {
   subnets         = module.vpc.private_subnets
 
   tags = {
-    Environment = "apnmt-k8s"
+    ResourceGroup = "apnmt-k8s"
     GithubRepo  = "terraform-aws-eks"
     GithubOrg   = "terraform-aws-modules"
     "karpenter.sh/discovery" = local.cluster_name
