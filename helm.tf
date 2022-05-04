@@ -55,15 +55,6 @@ resource "helm_release" "karpenter_provisioner" {
     name  = "cluster.name"
     value = local.cluster_name
   }
-
-  set {
-    name  = "requirements.capacityType.values"
-    value = "{${"spot"}}"
-  }
-  set {
-    name  = "requirements.zones.values"
-    value = "{${"eu-central-1a"}}"
-  }
 }
 
 resource "helm_release" "metrics-server" {
@@ -178,10 +169,10 @@ resource "helm_release" "appointmentservice-k8s" {
 
   set {
     name = "hpa.targetCPUUtilizationPercentage"
-    value = 50
+    value = 80
   }
   set {
-    name = "hpa.maxReplica"
+    name = "hpa.maxReplicas"
     value = 3
   }
 }
@@ -199,10 +190,10 @@ resource "helm_release" "organizationservice-k8s" {
 
   set {
     name = "hpa.targetCPUUtilizationPercentage"
-    value = 50
+    value = 80
   }
   set {
-    name = "hpa.maxReplica"
+    name = "hpa.maxReplicas"
     value = 3
   }
 }
@@ -220,11 +211,19 @@ resource "helm_release" "organizationappointmentservice-k8s" {
 
   set {
     name = "hpa.targetCPUUtilizationPercentage"
-    value = 50
+    value = 80
   }
   set {
-    name = "hpa.maxReplica"
+    name = "hpa.maxReplicas"
     value = 3
+  }
+  set {
+    name  = "mongodb.architecture"
+    value = "replicaset"
+  }
+  set {
+    name  = "mongodb.replicaCount"
+    value = 4
   }
 }
 
@@ -241,10 +240,10 @@ resource "helm_release" "paymentservice-k8s" {
 
   set {
     name = "hpa.targetCPUUtilizationPercentage"
-    value = 50
+    value = 80
   }
   set {
-    name = "hpa.maxReplica"
+    name = "hpa.maxReplicas"
     value = 3
   }
 }
@@ -262,10 +261,10 @@ resource "helm_release" "authservice-k8s" {
 
   set {
     name = "hpa.targetCPUUtilizationPercentage"
-    value = 50
+    value = 80
   }
   set {
-    name = "hpa.maxReplica"
+    name = "hpa.maxReplicas"
     value = 3
   }
 }
